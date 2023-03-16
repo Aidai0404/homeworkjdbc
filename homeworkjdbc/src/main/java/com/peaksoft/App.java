@@ -17,6 +17,7 @@ public class App {
         System.out.println(cities());
         System.out.println(countries());
         System.out.println(getByID(2));
+        createTable();
 
 
     }

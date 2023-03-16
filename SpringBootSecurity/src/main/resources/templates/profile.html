@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"   xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:object="${user}">
+  <h2 th:text="*{id}"></h2>
+  <h2 th:text="*{userName}">User Name</h2>
+    <h3 sec:authentication="principal.authorities"></h3>
+</div>
+</body>
+</html>
