@@ -24,6 +24,7 @@ public class AuthService {
                 .lastname(request.getLastname()).email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
+                .phoneNumber(request.getPhoneNumber())
                 .createdDate(LocalDate.now())
                 .build();
          return user;
@@ -34,6 +35,8 @@ public class AuthService {
         authenticationResponse.setFirstname(user.getFirstname());
         authenticationResponse.setLastname(user.getLastname());
         authenticationResponse.setEmail(user.getEmail());
+        authenticationResponse.setPhoneNumber(user.getPhoneNumber());
+        authenticationResponse.setCreatedDate(user.getCreatedDate());
         authenticationResponse.setPassword(user.getPassword());
 
         return authenticationResponse;
