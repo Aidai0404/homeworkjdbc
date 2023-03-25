@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "Aidai",
+    "gender": "FEMALE"
+  },
+  {
+    "id": 2,
+    "name": "Dilnaz",
+    "gender": "FEMALE"
+  },
+  {
+    "id": 3,
+    "name": "Bekbol",
+    "gender": "MALE"
+  },
+  {
+    "id": 4,
+    "name": "Syimyk",
+    "gender": "MALE"
+  }
+]
