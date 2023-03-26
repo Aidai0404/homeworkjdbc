@@ -30,6 +30,8 @@ public class SecurityConfig {
 //                .requestMatchers("/api/product/saveMain").permitAll()
                 .requestMatchers("/api/discount/**")
                 .permitAll()
+                .requestMatchers("api/gadgetarium/product")
+                .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

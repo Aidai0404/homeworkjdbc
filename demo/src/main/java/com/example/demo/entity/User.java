@@ -33,8 +33,8 @@ public class User implements UserDetails {
 
     @Column(name = "password")
     private String password;
-    @Column(name = "phoneNumber")
-    private String phoneNumber;
+//    @Column(name = "phoneNumber")
+//    private String phoneNumber;
     @Enumerated(EnumType.STRING)
     private Role role;
     private LocalDate createdDate;
