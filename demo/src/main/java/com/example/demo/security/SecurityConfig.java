@@ -25,6 +25,8 @@ public class SecurityConfig {
                 .requestMatchers("/api/gadgetarium/auth/**").permitAll()
                 .requestMatchers("/api/gadgetarium/auth/register")
                 .permitAll()
+                .requestMatchers("api/gadgetarium/product")
+                .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
