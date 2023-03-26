@@ -1,13 +1,6 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -45,6 +38,27 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
     private LocalDate createdDate;
+    @OneToOne
+    @JoinColumn(name = "basket_id")
+    private Basket basket;
+
+    @OneToOne
+    @JoinColumn(name = "chosen_id")
+    private Chosen chosen;
+
+    @OneToOne
+    @JoinColumn(name = "order_list_id")
+    private OrderList orderList;
+
+    @OneToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
+
+    @OneToOne
+    @JoinColumn(name = "payments_id")
+    private Payments payments;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
+    private List<Order>orders;
 
 
     @Override
