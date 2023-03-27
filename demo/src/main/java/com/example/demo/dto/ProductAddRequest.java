@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductRequest {
+public class ProductAddRequest {
     private String name;
     private String price;
     private Brand brand;

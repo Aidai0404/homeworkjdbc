@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.ProductDeleteResponse;
-import com.example.demo.dto.ProductRequest;
+import com.example.demo.dto.ProductAddRequest;
 import com.example.demo.dto.ProductResponse;
 import com.example.demo.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ProductResponse save(@RequestBody ProductRequest productRequest){
+    public ProductResponse save(@RequestBody ProductAddRequest productRequest){
        return productService.save(productRequest);
     }
 
@@ -32,7 +32,7 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public  ProductResponse update(@PathVariable("id") Long id, @RequestBody ProductRequest productRequest){
+    public  ProductResponse update(@PathVariable("id") Long id, @RequestBody ProductAddRequest productRequest){
         return productService.update(id,productRequest);
     }
 

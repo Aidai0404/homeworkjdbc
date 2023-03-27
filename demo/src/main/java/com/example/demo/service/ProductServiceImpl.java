@@ -1,13 +1,14 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.ProductDeleteResponse;
-import com.example.demo.dto.ProductRequest;
+import com.example.demo.dto.ProductAddRequest;
 import com.example.demo.dto.ProductResponse;
 import com.example.demo.entity.Category;
 import com.example.demo.entity.Product;
 import com.example.demo.repository.CategoryRepository;
 import com.example.demo.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 
@@ -31,14 +32,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductResponse save(ProductRequest productRequest) {
+    public ProductResponse save(ProductAddRequest productRequest) {
         Product product = mapToEntity(productRequest);
         productRepository.save(product);
         return mapToResponse(product);
     }
 
     @Override
-    public ProductResponse update(Long id, ProductRequest productRequest) {
+    public ProductResponse update(Long id, ProductAddRequest productRequest) {
         Product product = productRepository.findById(id).get();
         product.setName(productRequest.getName());
         product.setPrice(productRequest.getPrice());
@@ -74,12 +75,16 @@ public class ProductServiceImpl implements ProductService {
     public ProductDeleteResponse delete(Long id) {
         ProductDeleteResponse productDeleteResponse = new ProductDeleteResponse();
       Product product = productRepository.findById(id).get();
-      productRepository.delete(product);
-      productDeleteResponse.setMessage("The product with this id: " + " was deleted");
+      if(product != null){
+          productRepository.delete(product);
+          productDeleteResponse.setHttpStatus(HttpStatus.OK);
+      }else{
+          productDeleteResponse.setHttpStatus(HttpStatus.NOT_FOUND);
+      }
       return productDeleteResponse;
     }
 
-    public Product mapToEntity(ProductRequest productRequest){
+    public Product mapToEntity(ProductAddRequest productRequest){
         Product product = new Product();
         product.setName(productRequest.getName());
         product.setPrice(productRequest.getPrice());
