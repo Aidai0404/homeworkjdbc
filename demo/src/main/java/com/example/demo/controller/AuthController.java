@@ -10,13 +10,10 @@ import com.example.demo.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/gadgetarium/auth")
+@RequestMapping("api/auth")
 @RequiredArgsConstructor
 public class AuthController {
     private final AuthService authService;
@@ -26,18 +23,14 @@ public class AuthController {
 
      @PostMapping("/register")
     public AuthenticationResponse register(@RequestBody RegisterRequest request){
-         System.out.println("sdlfjsldkfjsldf");
-         System.out.println("sdlfjsldkfjsldf");
-         System.out.println("sdlfjsldkfjsldf");
         return  authService.register(request);
-//         return new AuthenticationResponse();
     }
 
     @PostMapping("/authenticate")
     public AuthenticationResponse login(@RequestBody AuthenticationRequest request){
-      authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
-      User user = userRepository.findByEmail(request.getEmail()).orElseThrow();
-      var jwtToken = tokenUtil.generateToken(user);
-       return AuthenticationResponse.builder().token(jwtToken).build();
+         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPassword());
+      authenticationManager.authenticate(token);
+      User user = userRepository.findByEmail(token.getName()).orElseThrow();
+       return authService.view(tokenUtil.generateToken(user),"successful",user);
     }
 }

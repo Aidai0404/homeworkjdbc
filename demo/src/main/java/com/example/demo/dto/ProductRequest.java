@@ -13,22 +13,26 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductAddRequest {
+public class ProductRequest {
     private String name;
-    private String price;
     private Brand brand;
+    private int price;
     private Color color;
     private String dateOfIssue;
     private OS os;
     private String ram;
     private String rom;
     private String sim;
+    private Long quantityOfSim;
     private String cpu;
     private String weight;
     private String guarantee;
-    private String image;
     private String displayInch;
     private String appointment;
     private String capacityBattery;
+    private String image;
+    private String PDF;
+    private String description;
     private Long categoryId;
+    private Long discountId;
 }

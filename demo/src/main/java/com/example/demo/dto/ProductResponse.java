@@ -10,15 +10,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
-import java.util.List;
-
-@Getter@Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductResponse {
-     private Long id;
+    private Long id;
     private String name;
-    private String price;
+    private int price;
     private Brand brand;
     private Color color;
     private String dateOfIssue;
@@ -26,6 +25,7 @@ public class ProductResponse {
     private String ram;
     private String rom;
     private String sim;
+    private Long quantityOfSim;
     private String cpu;
     private String weight;
     private String guarantee;
@@ -33,6 +33,8 @@ public class ProductResponse {
     private String displayInch;
     private String appointment;
     private String capacityBattery;
-    private List<Category> category;
-
+    private Category category;
+    private String PDF;
+    private String description;
+    private Long quantityOfProducts;
 }

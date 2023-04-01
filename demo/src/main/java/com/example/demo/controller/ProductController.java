@@ -1,43 +1,63 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.ProductDeleteResponse;
-import com.example.demo.dto.ProductAddRequest;
-import com.example.demo.dto.ProductResponse;
+import com.example.demo.dto.*;
+import com.example.demo.service.DiscountService;
 import com.example.demo.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-
 import java.util.List;
 
 @RestController
-@RequestMapping("api/gadgetarium/product")
+@RequestMapping("api/product")
 @RequiredArgsConstructor
 public class ProductController {
     private final ProductService productService;
+    private final DiscountService discountService;
 
     @GetMapping
-    public List<ProductResponse>AllProducts(){
+    public List<ProductResponse> AllProducts() {
         return productService.getAllProducts();
     }
 
-    @PostMapping
-    public ProductResponse save(@RequestBody ProductAddRequest productRequest){
-       return productService.save(productRequest);
+    @PostMapping("/saveMain")
+    public ProductResponse save(@RequestBody ProductRequest productRequest) {
+        return productService.save(productRequest);
     }
 
-    @GetMapping("/{id}")
-    public ProductResponse getById (@PathVariable("id") Long id){
+    @PostMapping("/savePrice/{id}")
+    public ProductResponse savePrice(@PathVariable("id") Long id,
+                                     @RequestBody ProductRequest priceRequest) {
+        return productService.savePriceAndQuantity(id, priceRequest);
+    }
+
+    @PostMapping("/saveDescription/{id}")
+    public ProductResponse saveDescription(@PathVariable("id") Long id, @RequestBody ProductRequest descriptionRequest) {
+        return productService.saveDescription(id, descriptionRequest);
+    }
+
+    @GetMapping("{id}")
+    public ProductResponse getById(@PathVariable("id") Long id) {
         return productService.getById(id);
     }
 
-    @PutMapping("/{id}")
-    public  ProductResponse update(@PathVariable("id") Long id, @RequestBody ProductAddRequest productRequest){
-        return productService.update(id,productRequest);
+    @PutMapping("{id}")
+    public ProductResponse update(@PathVariable("id") Long id, @RequestBody ProductRequest productRequest) {
+        return productService.update(id, productRequest);
     }
 
-    @DeleteMapping("/{id}")
-    public ProductDeleteResponse delete(@PathVariable("id") Long id){
+    @DeleteMapping("{id}")
+    public SimpleResponse delete(@PathVariable("id") Long id) {
         return productService.delete(id);
+    }
+
+    @GetMapping("/discount")
+    public List<DiscountResponse> discounts(){
+       return discountService.getAllDiscounts();
+    }
+
+    @PostMapping("/saveDiscount")
+    public DiscountResponse save(@RequestBody DiscountRequest discountRequest){
+        return discountService.save(discountRequest);
     }
 }
