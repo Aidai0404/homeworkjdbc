@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public interface UserService {
      void userAdd(User user);
-     public User findById(int id) throws IdException;
-     public String deleteUser(int id);
-     public ArrayList<User> getAllUsers();
+     User findById(int id) throws IdException;
+     String deleteUser(int id);
+     ArrayList<User> getAllUsers();
 }

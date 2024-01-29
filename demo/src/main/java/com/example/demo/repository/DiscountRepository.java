@@ -14,5 +14,4 @@ import java.util.List;
 public interface DiscountRepository extends JpaRepository<Discount, Long> {
     @Query("SELECT p FROM Product p JOIN p.discount discount WHERE discount.id=:id")
     List<Product> getProductsByDiscountId(@PathVariable("id") Long id, Pageable pageable);
-
 }

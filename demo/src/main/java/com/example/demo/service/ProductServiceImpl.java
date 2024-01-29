@@ -4,8 +4,10 @@ import com.example.demo.dto.ProductRequest;
 import com.example.demo.dto.ProductResponse;
 import com.example.demo.dto.SimpleResponse;
 import com.example.demo.entity.Category;
+import com.example.demo.entity.Discount;
 import com.example.demo.entity.Product;
 import com.example.demo.repository.CategoryRepository;
+import com.example.demo.repository.DiscountRepository;
 import com.example.demo.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,7 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
     private final CategoryRepository categoryRepository;
     private final ProductRepository productRepository;
+    private final DiscountRepository discountRepository;
 
     @Override
     public List<ProductResponse> getAllProducts() {
@@ -41,6 +44,7 @@ public class ProductServiceImpl implements ProductService {
     public ProductResponse savePriceAndQuantity(Long id, ProductRequest productRequest) {
         Product product = productRepository.findById(id).get();
         product.setPrice(productRequest.getPrice());
+        product.setDiscountId(productRequest.getDiscountId());
         productRepository.save(product);
         return mapToResponse(product);
 
@@ -132,7 +136,10 @@ public class ProductServiceImpl implements ProductService {
             Category category = categoryRepository.findById(productRequest.getCategoryId()).get();
             product.setCategory(category);
         }
-
+        if(productRequest.getDiscountId() != null){
+            Discount discount = discountRepository.findById(productRequest.getDiscountId()).get();
+            product.setDiscount(discount);
+        }
         return product;
     }
 
@@ -161,6 +168,7 @@ public class ProductServiceImpl implements ProductService {
         productResponse.setQuantityOfProducts(productRepository.Quantity(product.getBrand(),
                 product.getColor(), product.getRam(),
                 product.getQuantityOfSim(), product.getPrice()));
+        //  productResponse.setDiscountPercent(product.getDiscount().getPercent());
         return productResponse;
     }
 }

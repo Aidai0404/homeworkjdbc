@@ -35,7 +35,6 @@ return userdao.getUsers().stream()
 
     @Override
     public ArrayList<User> getAllUsers() {
-
         return userdao.getUsers();
     }
 

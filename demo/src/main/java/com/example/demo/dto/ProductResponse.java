@@ -18,6 +18,7 @@ public class ProductResponse {
     private Long id;
     private String name;
     private int price;
+    private int currentPrice;
     private Brand brand;
     private Color color;
     private String dateOfIssue;
@@ -37,4 +38,5 @@ public class ProductResponse {
     private String PDF;
     private String description;
     private Long quantityOfProducts;
+    private int discountPercent;
 }
